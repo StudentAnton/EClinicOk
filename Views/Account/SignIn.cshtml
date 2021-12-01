@@ -1,0 +1,47 @@
+﻿@model SignInViewModel
+<h2>Sign in to use this app</h2>
+
+<form method="post" asp-action="SignIn" asp-controller="Account" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="UserName" class="form-label">Username</label>
+        <input asp-for="UserName" class="form-control" autofocus />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="FullName" class="form-label">FullName</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName"></span>
+    </div>
+
+    <div>
+        <label asp-for="PhoneNumber" class="form-label">PhoneNumber</label>
+        <input asp-for="PhoneNumber" class="form-control" type="tel" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <label asp-for="PasswordConfirmation" class="form-label">Confirm your password</label>
+        <input asp-for="PasswordConfirmation" class="form-control" type="password" />
+        <span asp-validation-for="PasswordConfirmation"></span>
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-primary" value="Sign In" style="margin-top:20px" />
+    </div>
+
+</form>
+<br />

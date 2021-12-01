@@ -1,0 +1,32 @@
+﻿@model List<List<MeetingForTableViewModel>>
+
+<h3 style="margin:20px">Your meetings for 7 days</h3>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        @for (int dayIndex = 0; dayIndex < 7; dayIndex++)
+        {
+            <th>@DateTime.Today.Date.AddDays(dayIndex).ToShortDateString()</th>
+        }
+        </tr>
+    @for(int hourIndex = 9; hourIndex < 18; hourIndex++)
+    {
+        <tr>
+            <td>@hourIndex : 00</td>
+            @for(int day = 0; day < 7; day++)
+            {
+                @if(@Model[day][hourIndex - 9] != null)
+                {
+                    <td style="background-color:#61DD48">@Model[day][hourIndex - 9].PatientName
+                        <a asp-controller="MedicalCards" asp-action="ShowMedicalCard"
+                           asp-route-patientId="@Model[day][hourIndex - 9].PatientId">+</a>
+                    </td>
+                }
+                else
+                {   
+                    <td></td>
+                }
+            }
+        </tr>
+    }
+</table>

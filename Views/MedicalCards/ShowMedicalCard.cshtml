@@ -1,0 +1,23 @@
+﻿@model CreateMedicalCardViewModel
+
+<h2>Medical card</h2>
+
+<form method="post" asp-action="Create" asp-controller="MedicalCards" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label class="form-label" asp-for="Content">Content</label>
+        <textarea class="form-control" rows="6" asp-for="Content" autofocus></textarea>
+        <span asp-validation-for="Content"></span>
+    </div>
+
+    <input type="hidden" asp-for="PatientId" />
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedAt" />
+
+
+    <div>
+        <input type="submit" style="margin-top:20px" class="btn btn-primary" value="Submit" />
+    </div>
+
+</form>
+<br />

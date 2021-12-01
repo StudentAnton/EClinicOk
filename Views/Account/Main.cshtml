@@ -1,0 +1,16 @@
+﻿@model ShowUserViewModel 
+<h2>Main</h2>
+
+<div class="card">
+    <div class="card-header">
+        @Model.FullName
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>UserName: @Model.UserName</p>
+            <p>Email: @Model.Email</p>
+            <p>Phone: @Model.PhoneNumber</p>
+            <footer class="blockquote-footer"><cite title="Source Title">@Model.Roles</cite></footer>
+        </blockquote>
+    </div>
+</div>

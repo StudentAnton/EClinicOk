@@ -1,0 +1,36 @@
+﻿@model List<MeetingForListViewModel>
+
+<h3>My meetings</h3>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Doctor`s Name
+        </th>
+        <th>
+            Doctor Type
+        </th>
+        <th>
+            Meeting date
+        </th>
+        <th>
+            Cabinet
+        </th>
+        <th>
+            MedicalCard
+        </th>
+    </tr>
+    @foreach (var meeting in Model)
+    {
+        <tr>
+            <td>@meeting.DoctorName</td>
+            <td>@meeting.DoctorType</td>
+            <td>@meeting.MeettingDate</td>
+            <td>@meeting.Cabinet</td>
+            <td>
+                <a class="link-info" asp-controller="MedicalCards" asp-action="ShowMedicalCard"
+                   asp-route-patientId="@meeting.PatientId" asp-route-doctorId="@meeting.DoctorId">Card</a>
+            </td>
+        </tr>
+    }
+</table>

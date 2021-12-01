@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EClinic</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="Main">EClinic</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Users</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Meetings" asp-action="ManageMeetings">Manage meetings</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Patient"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Meetings" asp-action="Create">Meetings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Meetings" asp-action="ShowMeetingsForPatient">My meetings</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Doctor"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Meetings" asp-action="ShowMeetingsForDoctor">My Meetings</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {   
+                            <li class="nav-item d-flex" style="text-align:right">
+                                <form class="form-inline my-2 my-lg-0" method="post" asp-action="LogOut" asp-controller="Account">
+                                    <input class="form-control mr-sm-2 navbar-text" type="submit" value="Log Out">
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="text-align:right; margin-left:20px">
+                                <a asp-action="LogIn" asp-controller="Account" class="btn btn-outline-primary">Log in</a>
+                            </li>
+                            <li class="nav-item" style="text-align:right;margin-left:20px">
+                                <a asp-action="SignIn" asp-controller="Account" class="btn btn-outline-primary">Sign in</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - EClinic - <a asp-area="" asp-controller="Account" asp-action="Main">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

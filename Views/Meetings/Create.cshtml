@@ -1,0 +1,40 @@
+﻿@model MeetingCreateViewModel
+
+<form method="post" asp-action="Create" asp-controller="Meetings">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div style="margin-top:20px">
+        <label asp-for="MeettingDate" class="form-label">MeettingDate</label>
+        <input asp-for="MeettingDate" class="form-control" type="datetime-local" />
+        <span asp-validation-for="MeettingDate"></span>
+    </div>
+
+    <div style="margin-top:20px">
+        <label asp-for="DoctorTypeId" class="form-label">DoctorType</label>
+        <select asp-for="DoctorTypeId">
+            @foreach (var type in ViewBag.DoctorTypes)
+            {
+                <option value="@type.Id">@type.Name</option>
+            }
+        </select>
+        <span asp-validation-for="DoctorTypeId"></span>
+    </div>
+
+    <div>
+        @if(Model != null && Model.AllowedTimes != null && Model.AllowedTimes.Count > 0)
+        {
+            <h6>Allowed times on your date</h6>
+            <ul>
+                @foreach(var dateTime in Model.AllowedTimes)
+                {
+                    <li>@dateTime.ToShortTimeString()</li>
+                }
+            </ul>
+        }
+</div>
+
+    <div>
+        <input type="submit" class="btn btn-primary" style="margin-top:20px" value="Register" />
+    </div>
+
+</form>

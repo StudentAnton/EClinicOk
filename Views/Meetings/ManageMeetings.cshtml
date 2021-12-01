@@ -1,0 +1,70 @@
+﻿@model MeetingManageViewModel
+
+<h2>Manage by meetings</h2>
+
+<form asp-action="ManageMeetings" asp-controller="Meetings">
+    <div>
+        <label asp-for="doctorTypeId">Doctor type</label>
+        <select asp-for="doctorTypeId">
+            @foreach (var type in ViewBag.DoctorTypes)
+            {
+                <option value="@type.Id">@type.Name</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="doctorName">Doctor`s name</label>
+        <input asp-for="doctorName" />
+    </div>
+
+    <div>
+        <label asp-for="date">MeettingDate</label>
+        <input asp-for="date" type="datetime-local" />
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-primary" style="margin-bottom:20px;margin-top:20px" value="Find" />
+    </div>
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Doctor`s Name
+            </th>
+            <th>
+                Doctor Type
+            </th>
+            <th>
+                Meeting date
+            </th>
+            <th>
+                Patient Name
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Action Cancel
+            </th>
+        </tr>
+        @foreach (var meeting in Model.ModelsList)
+        {
+            <tr>
+                <td>@meeting.DoctorName</td>
+                <td>@meeting.DoctorTypeName</td>
+                <td>@meeting.MeettingDate</td>
+                <td>@meeting.PatientName</td>
+                <td>@meeting.MeettingStatusName</td>
+                <td>
+                    @if (meeting.MeettingStatusId != 3)
+                    {
+                        <a class="link-danger asp-controller="Meetings" asp-action="CancelMeeting" asp-route-meetingId="@meeting.Id">Cancel</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+
+</form>
